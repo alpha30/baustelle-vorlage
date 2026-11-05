@@ -1,0 +1,28 @@
+# Budget und Kosten dieser Baustelle. Claude Code pflegt diese Datei (Skill belege-uebernehmen).
+# Übersicht neu erzeugen:  python werkzeuge/budget_export.py .
+#
+# budgets: ein Eintrag je Vergabetopf (was zusammen vergeben und bezahlt wird)
+#   - id: dach                      # kurz, eindeutig
+#     name: Dach                    # Anzeige
+#     gewerke: [dachabriss, dach]   # oder gewerk: x  oder kategorie: x
+#     betrag: 80000                 # ein Wert in Euro brutto; null, wenn noch offen
+#     quelle: eigenschaetzung       # vertrag | angebot | fremdschaetzung | eigenschaetzung | offen
+#     stand: "2026-11-01"           # Datum, auf das sich der Betrag bezieht
+#     unsicherheit: hoch            # niedrig | mittel | hoch
+#
+# positionen: ein Eintrag je Beleg (Angebot, Auftrag, Rechnung, Gebühr)
+#   - id: zimmerei-rechnung-1
+#     firma: Zimmerei Muster
+#     gewerk: dach                  # oder kategorie: ...
+#     art: rechnung                 # angebot | auftrag | rechnung | gebuehr | eigenleistung
+#     status: bezahlt               # geplant | beauftragt | teilbezahlt | bezahlt
+#     datum: "2026-11-02"
+#     betrag_brutto: 4998.00
+#     bezug: zimmerei-auftrag-1     # bei Rechnungen auf einen Auftrag (optional)
+#     beleg: 2026-11-04-093000-zimmereimuster.pdf   # Dateiname des Originals (liegt nicht im Repo)
+#
+# Keine IBAN, keine Kontodaten, keine Rechnungen als Datei in diesem Repo.
+
+budgets: []
+
+positionen: []
