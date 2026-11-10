@@ -14,7 +14,7 @@ description: Beleg-Entwürfe aus eingang/belege/ in die Budgetdatei übernehmen 
    - `gewerk`: ein Gewerk, das in einem Topf unter `budgets:` vorkommt; passt keins, nachfragen
    - `status`: bei Rechnungen `bezahlt` nur, wenn der Bauherr das sagt, sonst `beauftragt`; Angebote `geplant`
    - `bezug`: bei einer Rechnung auf einen Auftrag dessen `id` (nachfragen)
-   - `beleg`: der Wert von `datei` aus dem Entwurf
+   - `beleg`: der Wert von `datei` aus dem Entwurf (das Original liegt unter `docs/belege/JJJJ/`)
    Keine IBAN, keine Kontodaten übernehmen, auch wenn sie versehentlich im Entwurf stehen.
 4. Den Entwurf aus `eingang/belege/` löschen.
 5. Übersicht neu erzeugen: `python werkzeuge/budget_export.py .` (schreibt `docs/budget/uebersicht.json`).

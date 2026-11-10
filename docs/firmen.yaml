@@ -1,0 +1,15 @@
+# Firmen dieser Baustelle: Betriebe, Planer, Ämter. Die App zeigt sie im Bereich „Firmen“.
+# Form genau einhalten (die App liest zeilenweise): je Firma ein Block, je Feld eine Zeile.
+#
+#   - id: zimmerei-muster              # kurz, eindeutig, a-z 0-9 Bindestrich; ändert sich nie
+#     name: Zimmerei Muster GmbH
+#     gewerk: zimmerer
+#     ansprechpartner: Herr Muster
+#     telefon: "02421 000000"          # immer in Anführungszeichen
+#     mail: info@zimmerei-muster.example
+#     stand: angebot                   # angefragt | angebot | absage | beauftragt | fertig
+#     kontakt: "2026-12-03 Telefon: Angebot kommt bis Freitag"   # nur der letzte Kontakt
+#     notiz: Empfehlung vom Nachbarn
+#
+# Nur geschäftliche Kontaktdaten. Keine Bankdaten, keine Privatadressen.
+firmen: []

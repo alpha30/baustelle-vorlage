@@ -9,6 +9,9 @@ description: Was die App in eingang/ abgelegt hat, einsortieren. Verwenden bei �
 2. Je Datei, älteste zuerst:
    - **`notizen/*.md`:** Inhalt als Tagebuch-Eintrag für das Erfassungsdatum (Skill `tagebuch`) oder als
      Aufgabe (Skill `aufgabe`) übernehmen. Bei Unklarheit fragen.
+   - **`auftraege/*.md`:** Anweisung vom Handy. Ausführen, dabei die Grenzen in `CLAUDE.md` einhalten: Mails,
+     Anfragen und Termine erst nach Zustimmung. Was getan wurde, kommt ins Arbeitsprotokoll des heutigen Tages
+     (`protokoll/JJJJ-MM-TT.md`), nicht ins Tagebuch.
    - **`entscheidungen/*.md`:** Entscheidung in zwei, drei Sätzen zusammenfassen, Optionen und Folgen nennen und
      fragen, ob daraus ein ADR werden soll. Erst nach „ja“ `adr/NNNN-titel.md` schreiben (nächste freie Nummer).
    - **`belege/*.yaml`:** mit dem Skill `belege-uebernehmen` in die Budgetdatei übernehmen.

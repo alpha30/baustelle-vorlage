@@ -8,10 +8,16 @@ kurz, auf Deutsch, ohne Fachjargon aus der Softwareentwicklung.
 
 | Ordner / Datei | Inhalt |
 |---|---|
-| `journal/JJJJ-MM-TT.md` | Bautagebuch, eine Datei je Tag |
-| `journal/bilder/` | Fotos zum Tagebuch (kommen meist aus der App) |
+| `journal/JJJJ-MM-TT.md` | Bautagebuch: was auf der Baustelle geschah. Eine Datei je Tag |
+| `journal/bilder/JJJJ-MM/` | Fotos zum Tagebuch (kommen meist aus der App) |
+| `protokoll/JJJJ-MM-TT.md` | Arbeitsprotokoll: was du am PC erarbeitet hast (siehe unten) |
 | `tasks/backlog.md` | Aufgabenliste, strenges Format (siehe unten) |
-| `docs/` | Wissen über das Haus: Pläne, Maße, Firmen, Budget (`docs/budget/`), Angebote (`docs/angebote/`) |
+| `tasks/termine.md` | Termine mit Datum: Ortstermine, Lieferungen, Fristen |
+| `tasks/maengel.md` | Mängel mit Firma, Foto und Frist |
+| `docs/firmen.yaml` | Betriebe, Planer, Ämter mit Telefon und Stand |
+| `docs/angebote/<gewerk>/` | Angebote als PDF und ihr Vergleich |
+| `docs/belege/JJJJ/` | Rechnungen und Quittungen als Datei |
+| `docs/` | alles andere Wissen über das Haus: Pläne, Maße, Budget (`docs/budget/`) |
 | `adr/` | Entscheidungen, eine Datei je Entscheidung (`0001-titel.md`) |
 | `eingang/` | Was die App erfasst hat und noch einsortiert werden muss |
 
@@ -22,7 +28,51 @@ Gehört etwas nirgends hin, frag nach, statt einen neuen Ordner anzulegen.
 - Datei `journal/JJJJ-MM-TT.md` mit erster Zeile `# JJJJ-MM-TT`. Fehlt sie, anlegen.
 - Jeder Eintrag ist ein Abschnitt `## Titel` am **Ende** der Datei. Bestehenden Text nicht ändern.
 - „Notiere …“, „Heute …“, „Ins Tagebuch …“ heißt: Eintrag für heute. Ein anderes Datum nur, wenn es genannt wird.
-- Bilder: `![Beschreibung](bilder/datei.jpg)`.
+- Bilder: `![Beschreibung](bilder/JJJJ-MM/datei.jpg)`.
+- **Nur die Baustelle gehört ins Tagebuch:** was geliefert, gebaut, besprochen, festgestellt wurde. Der Bauherr
+  liest es auf dem Handy.
+- Ein Gespräch mit einer Firma bekommt den Titel `## @<id> Telefon` (oder `Mail`, `Vor Ort`), mit der `id` aus
+  `docs/firmen.yaml`. Danach dort das Feld `kontakt` der Firma auf diesen Kontakt setzen.
+- Den Abschnitt `## Tagesbericht` (Wetter, Anwesend, Arbeiten, Eigenleistung, Besonderes) schreibt die App. Nicht
+  umformatieren; die App rechnet mit den Stunden.
+
+## Arbeitsprotokoll (`protokoll/`)
+
+Was **du** am PC getan hast, steht nicht im Tagebuch, sondern in `protokoll/JJJJ-MM-TT.md` (gleiches Format: erste
+Zeile `# JJJJ-MM-TT`, je Schritt ein Abschnitt `## Titel` am Ende). Dazu gehören Recherchen, Auswertungen,
+Vergleiche, verschickte Mails, erledigte Aufträge vom Handy. Kurz halten: was, Ergebnis, wo die Datei liegt.
+
+## Termine (`tasks/termine.md`)
+
+```
+- [ ] 2027-01-12 08:00 Zimmerer beginnt @zimmerei-muster
+- [ ] 2027-01-15 Angebotsfrist Fenster
+```
+
+- Datum `JJJJ-MM-TT` ist Pflicht, Uhrzeit `hh:mm` optional, `@<id>` nennt die Firma.
+- Alles mit festem Tag gehört hierher, nicht in den Backlog. Die App erinnert am Vortag und am Tag selbst.
+- Vergangene Termine löschen; was dabei herauskam, steht im Tagebuch.
+
+## Firmen (`docs/firmen.yaml`)
+
+- Jede Firma, mit der der Bauherr zu tun hat, bekommt einen Eintrag; die Form steht oben in der Datei und ist genau
+  einzuhalten (ein Feld je Zeile, Telefon in Anführungszeichen).
+- `stand` pflegen: `angefragt`, `angebot`, `absage`, `beauftragt`, `fertig`.
+- Die `id` nie ändern; sie steht in Terminen, Mängeln und im Tagebuch.
+- Nur geschäftliche Kontaktdaten. Keine Bankdaten, keine Privatadressen.
+
+## Mängel (`tasks/maengel.md`)
+
+```
+- [ ] Kehlblech an der Gaube undicht @zimmerei-muster (Frist 2027-02-01)
+  - Ort: dach
+  - Festgestellt: 2027-01-20
+  - ![](../journal/bilder/2027-01/2027-01-20-101500-dach.jpg)
+```
+
+- Format wie Aufgaben. Offene unter `## Offen`; behobene mit `[x]` und Unterpunkt `Behoben: JJJJ-MM-TT` nach
+  `## Behoben` verschieben.
+- Eine Mängelanzeige an die Firma nur als Entwurf vorlegen (Skill `mangel`).
 
 ## Aufgaben (`tasks/backlog.md`)
 
@@ -41,10 +91,13 @@ Eine Zeile je Aufgabe, ganz links, sonst nichts auf oberster Ebene:
 
 ## Eingang (`eingang/`)
 
-Die App legt hier ab: `belege/` (Beleg-Entwürfe als YAML), `entscheidungen/` (eingesprochene Entscheidungen),
-`notizen/` (alles andere). Beim Abarbeiten (Skill `eingang-abarbeiten`):
+Die App legt hier ab: `belege/` (Beleg-Entwürfe als YAML), `auftraege/` (Anweisungen an den PC),
+`entscheidungen/` (eingesprochene Entscheidungen), `notizen/` (alles andere). Beim Abarbeiten
+(Skill `eingang-abarbeiten`):
 
 - **Belege:** in die Budgetdatei übernehmen, aber erst nach Rückfrage. Gewerk-Vorschlag prüfen.
+- **Aufträge:** sind Anweisungen vom Handy („Schreib X wegen Y“). Ausführen, soweit die Regeln es erlauben; alles,
+  was nach außen geht, vorher vorlegen. Das Ergebnis ins Tagebuch.
 - **Entscheidungen:** Optionen und Folgen kurz vorlegen; ein ADR in `adr/` erst nach Zustimmung schreiben.
 - **Notizen:** ins Tagebuch oder in den Backlog einsortieren.
 - Eine Datei aus `eingang/` erst löschen, wenn ihr Inhalt übernommen und gespeichert ist.
@@ -59,8 +112,9 @@ Die App legt hier ab: `belege/` (Beleg-Entwürfe als YAML), `entscheidungen/` (e
 ## Grenzen
 
 **Immer**
-- Originalbelege (Rechnungen, Angebote als PDF/Foto) nie ins Repo. Keine IBAN, keine Kontodaten, keine
-  Ausweisnummern, keine Passwörter oder Tokens.
+- Angebote und Rechnungen dürfen als Datei ins Repo (`docs/angebote/<gewerk>/`, `docs/belege/JJJJ/`). Nicht hinein
+  gehören eigene Kontodaten, Ausweise, Steuer-ID, Passwörter oder Tokens. In Budget- und Firmendaten keine IBAN und
+  keine Kontodaten übernehmen, auch wenn sie auf dem Beleg stehen.
 - Fotos nur ohne EXIF/GPS-Daten ablegen. In Bildern, die an Dritte gehen, keine Adressen und keine Kindernamen.
 - Was die KI aus Sprache oder Belegen gemacht hat, bestätigt der Bauherr, bevor es gespeichert wird.
 

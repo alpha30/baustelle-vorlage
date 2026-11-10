@@ -10,6 +10,9 @@ Rechenregeln wie bauplanung/src/budget/report.py:
 - Prognose = max(Budget, Ist + Obligo) je Topf; ohne Budget Ist + Obligo.
 - Abweichung = Prognose - Budget; null ohne Budget.
 Zusätzlich: Angebote und Aufträge als Summen der Positionen mit art angebot bzw. auftrag.
+Die Summe der Angebote ist nur eine Rechengröße: Mehrere Angebote für dieselbe Leistung sind Alternativen.
+Deshalb steht je Topf zusätzlich `angebote_liste` mit Firma, Betrag und Datum, günstigstes zuerst; die App
+zeigt die Liste und addiert nicht (SPEC B8).
 Positionen ohne Budgettopf landen im Topf "ohne-topf", damit die Summen der Töpfe die Gesamtsummen ergeben.
 
 Für bauplanung (mit OpenProject-Overlay und Gewerke-Prüfung gegen plan.ts) wird report.py selbst geladen:
@@ -84,6 +87,16 @@ def _summe_art(positionen, keys, art):
                and (p.get("gewerk") or p.get("kategorie")) in keys)
 
 
+def _angebote(positionen, keys):
+    """Einzelne Angebote eines Topfs, günstigstes zuerst (SPEC B8)."""
+    liste = [{"firma": str(p.get("firma") or p.get("id") or "ohne Namen"), "betrag": _runden(p["betrag_brutto"]),
+              "datum": None if p.get("datum") is None else str(p["datum"])}
+             for p in positionen
+             if p.get("art") == "angebot" and p.get("betrag_brutto") is not None
+             and (p.get("gewerk") or p.get("kategorie")) in keys]
+    return sorted(liste, key=lambda a: (a["betrag"], a["firma"]))
+
+
 def _runden(x):
     return None if x is None else round(float(x), 2)
 
@@ -121,6 +134,7 @@ def exportieren(daten: dict, quelle: str, report=None, jetzt: datetime | None = 
             "abweichung": _runden(prog - t["betrag"]) if t["betrag"] is not None else None,
             "quelle": t.get("quelle"), "stand": None if t.get("stand") is None else str(t.get("stand")),
             "unsicherheit": t.get("unsicherheit"),
+            "angebote_liste": _angebote(positionen, t["keys"]),
         })
 
     summen = {f: _runden(sum(t[f] for t in aus)) for f in ("angebote", "auftraege", "ist", "obligo", "prognose")}
