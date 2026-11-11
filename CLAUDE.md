@@ -106,6 +106,9 @@ Die App legt hier ab: `belege/` (Beleg-Entwürfe als YAML), `auftraege/` (Anweis
 
 - Nach jedem abgeschlossenen Schritt speichern: `git add` mit den geänderten Dateien einzeln, `git commit` mit einer
   kurzen Nachricht, dann `git pull --rebase` und `git push`. So sieht die App den neuen Stand.
+- Immer auf `main` speichern, die App liest nur `main`. Keinen eigenen Zweig anlegen, keinen Pull Request öffnen.
+  Läuft die Sitzung auf einem anderen Zweig (Claude-App, claude.ai/code): nach dem Commit
+  `git pull --rebase origin main` und `git push origin HEAD:main`.
 - Nie `git add -A` oder `git add .`, nie Force-Push. Bei einem Konflikt anhalten und fragen.
 - Vor dem Ändern einer Datei den aktuellen Stand lesen; die App kann inzwischen etwas angehängt haben.
 
