@@ -8,7 +8,8 @@ description: Was die App in eingang/ abgelegt hat, einsortieren. Verwenden bei �
 1. `git pull --rebase`, dann `eingang/` auflisten. Ist er leer, das kurz sagen und aufhören.
 2. Je Datei, älteste zuerst:
    - **`notizen/*.md`:** Inhalt als Tagebuch-Eintrag für das Erfassungsdatum (Skill `tagebuch`) oder als
-     Aufgabe (Skill `aufgabe`) übernehmen. Bei Unklarheit fragen.
+     Aufgabe (Skill `aufgabe`) übernehmen. Bei Unklarheit fragen. Diktierte Namen gegen `docs/firmen.yaml`
+     prüfen und verhörte korrigieren (siehe „Verhörte Namen“ in `CLAUDE.md`).
    - **`auftraege/*.md`:** Anweisung vom Handy. Ausführen, dabei die Grenzen in `CLAUDE.md` einhalten: Mails,
      Anfragen und Termine erst nach Zustimmung. Was getan wurde, kommt ins Arbeitsprotokoll des heutigen Tages
      (`protokoll/JJJJ-MM-TT.md`), nicht ins Tagebuch.

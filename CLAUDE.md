@@ -33,6 +33,10 @@ Gehört etwas nirgends hin, frag nach, statt einen neuen Ordner anzulegen.
   liest es auf dem Handy.
 - Ein Gespräch mit einer Firma bekommt den Titel `## @<id> Telefon` (oder `Mail`, `Vor Ort`), mit der `id` aus
   `docs/firmen.yaml`. Danach dort das Feld `kontakt` der Firma auf diesen Kontakt setzen.
+- **Verhörte Namen:** Einträge aus der App sind oft diktiert, die Spracherkennung verhört Namen („Löws“ statt
+  „Töws“). Klingt ein Name ähnlich wie eine Firma oder ein Ansprechpartner aus `docs/firmen.yaml`, beim
+  Übernehmen die richtige Schreibweise nehmen und das kurz sagen. In schon gespeicherten Einträgen erst nach
+  Rückfrage korrigieren. Unbekannte Namen nicht raten, nachfragen.
 - Den Abschnitt `## Tagesbericht` (Wetter, Anwesend, Arbeiten, Eigenleistung, Besonderes) schreibt die App. Nicht
   umformatieren; die App rechnet mit den Stunden.
 
