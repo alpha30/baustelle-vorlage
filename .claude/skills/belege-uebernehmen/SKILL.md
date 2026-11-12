@@ -7,7 +7,9 @@ description: Beleg-Entwürfe aus eingang/belege/ in die Budgetdatei übernehmen 
 
 1. `git pull --rebase`, dann `eingang/belege/*.yaml` auflisten. Leer: kurz sagen und aufhören.
 2. Je Entwurf (älteste zuerst) dem Bauherrn zeigen: Firma, Datum, Art, Netto, Brutto, Gewerk-Vorschlag.
-   Steht `betrag_quelle: ki`, darauf hinweisen, dass die KI gelesen hat.
+   Steht `betrag_quelle: ki`, darauf hinweisen, dass die KI gelesen hat. Bei `ki-summe` hat die KI den Betrag
+   aus Positionspreisen zusammengezählt: ausdrücklich prüfen lassen, das Original liegt meist unter
+   `docs/angebote/` oder `docs/belege/`. Eine `notiz` im Entwurf vorlesen.
 3. **Erst nach Zustimmung** eine Position in `docs/budget/positionen.yaml` unter `positionen:` anlegen:
    - `id`: kurz und eindeutig, z. B. `zimmerei-rechnung-2`
    - `firma`, `datum`, `art`, `betrag_brutto` aus dem Entwurf
